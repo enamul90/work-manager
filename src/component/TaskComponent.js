@@ -75,7 +75,7 @@ export default function TaskComponent() {
                                 </button>
                             </div>
 
-                            <div className='space-x-2 flex hidden  '>
+                            <div className='space-x-2 flex   '>
                                 <input
                                     placeholder='Time - H'
                                     className='w-16 outline-0 border border-lightLine px-2 rounded text-xs'
