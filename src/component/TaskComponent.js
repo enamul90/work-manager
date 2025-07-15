@@ -12,7 +12,7 @@ export default function TaskComponent() {
                 <input
                     type="text"
 
-                    className="border border-lightLine  w-full px-3 py-2 rounded-md outline-0"
+                    className="bg-secondary/8 w-full px-3 py-2 rounded-md outline-0"
                     placeholder="Working Day Name"
                 />
                 <button className="btn-primary px-6 py-2 text-sm cursor-pointer">
@@ -21,34 +21,39 @@ export default function TaskComponent() {
             </div>
 
             {/* show day list */}
-            <div className="flex justify-between items-center mb-3 w-full gap-3 p-3 bg-white shadow  hover:shadow-lg transition-shadow rounded-md border border-lightLine">
+            <div className=" mb-3 w-full gap-3  bg-white shadow  hover:shadow-lg transition-shadow rounded-md border border-lightLine">
 
-                <h3 className='text-lg text-lightText-100 font-medium '>20/8/2024 || শনিবার
-                    <span className='ms-2 text-base font-semibold text-secondary'>- 10 pm</span>
+                <div className='md:flex justify-between items-center p-3 border-b border-lightLine space-y-3 md:space-y-0'>
+                    <h3 className='text-lg text-lightText-100 font-medium '>20/8/2024 || শনিবার
+                        <span className='ms-2 text-base font-semibold text-secondary'>- 10 pm</span>
 
-                </h3>
+                    </h3>
 
-                <div className='flex items-center gap-3'>
-                    <button className=" py-2 text-xs  px-3 bg-secondary  cursor-pointer rounded-xl text-white">
-                        Add Work
-                    </button>
+                    <div className='flex items-center gap-3 justify-end'>
+                        <button className=" py-2 text-xs  px-3 bg-secondary  cursor-pointer rounded-lg text-white">
+                            Add Work
+                        </button>
 
-                    <button className="bg-primary p-1 text-2xl  cursor-pointer rounded-full text-white">
-                        <IoMdArrowDropdown />
-                    </button>
+                        <button className="bg-primary p-1 text-2xl  cursor-pointer rounded-full text-white">
+                            <IoMdArrowDropdown />
+                        </button>
+                    </div>
+
                 </div>
-            </div>
 
-            {/* show work list */}
-            <div className="mb-3 w-full gap-3 p-3 bg-white shadow  hover:shadow-lg transition-shadow rounded-md border border-lightLine mt-[-10px]">
 
                 {/* work */}
-                <div className='grid grid-cols-3 gap-3'>
-                    <div className='p-2 border border-lightLine rounded-md'>
+                <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-3 p-3'>
+                    <div className='p-3 border border-lightLine rounded-md'>
                         {/* work tittle */}
-                        <div className='mb-3 flex justify-between items-center'>
+                        <div className='mb-4 flex justify-between items-center '>
                             <h4 className='text-lightText-100 font-medium  uppercase'>UVIOM Work </h4>
-                            <button className='text-xs  px-2 py-1 text-white bg-primary rounded cursor-pointer shadow'>Add Task</button>
+
+                            <div className=' space-x-2'>
+                                <button className='text-xs  px-2 py-1 text-white bg-neutral-900 rounded cursor-pointer shadow'>Edit Work</button>
+                                <button className='text-xs  px-2 py-1 text-white bg-primary rounded cursor-pointer shadow'>Add Task</button>
+                            </div>
+
                         </div>
 
 
@@ -84,13 +89,11 @@ export default function TaskComponent() {
                                     update
                                 </button>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
-
             </div>
-
 
 
 

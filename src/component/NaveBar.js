@@ -52,7 +52,8 @@ export default function NaveBar() {
                                 <span className="text-gray-700 font-medium">{user.username}</span>
 
                                 <button
-                                    className="bg-primary px-3 py-2 text-sm text-darkText-100 font-medium rounded-md ms-5"
+                                    className="bg-primary px-3 py-2 text-sm text-darkText-100 font-medium rounded-md ms-5 cursor-pointer"
+                                    onClick={()=>router.push("/auth/login")}
                                 >
                                     Sign Out
                                 </button>
@@ -106,6 +107,7 @@ export default function NaveBar() {
                             </div>
                             <button
                                 className="bg-primary px-3 py-2 text-sm text-left text-darkText-100 rounded-md font-medium w-fit"
+                                onClick={()=>router.push("/auth/login")}
                             >
                                 Sign Out
                             </button>
