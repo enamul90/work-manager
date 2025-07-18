@@ -4,12 +4,49 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+
+import API from '@/app/utils/axios.js'
+
 export default function Page() {
 
   const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+
+  const loginHandler =  async (e) => {
+    e.preventDefault();
+
+    const data = {
+      email,
+      password,
+    }
+
+    try {
+      setLoading(true);
+      let res = await API.post('/user/login', data);
+      setLoading(false);
+
+      if (res.data.message === "Invalid credentials") {
+        alert(res.data.message);
+      }
+
+      else {
+        console.log(res);
+        setEmail(" ")
+        setPassword("")
+        router.push('/')
+      }
+
+    }
+    catch (e) {
+      console.error(e, "login handler");
+    }
+
+  }
 
   
 
@@ -17,7 +54,7 @@ export default function Page() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login to Your Account</h2>
-        <form  className="space-y-6">
+        <form onSubmit={loginHandler}  className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email Address
@@ -63,9 +100,14 @@ export default function Page() {
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+            className="w-full py-2 px-4 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary flex items-center justify-center gap-4"
           >
             Sign In
+            {
+              loading && (
+                  <div className={"loader"}></div>
+                )
+            }
           </button>
         </form>
         <p className="mt-6 text-center text-sm text-gray-600">
