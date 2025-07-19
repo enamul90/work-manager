@@ -1,18 +1,19 @@
+
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
 export function getAuthUser() {
     const cookieStore = cookies();
-    const token = cookieStore.get('token')?.value;
+    const token = cookieStore.get('token');
 
-    if (!token) return null;
+    if (!token.value) return null;
 
     try {
-        const decoded = jwt.verify(token, '12-ejrfewjf-333-hvgjdfkhgk');
-        return decoded;
-    } catch (err) {
-        console.log(err)
-        return null;
+        const decoded = jwt.verify(token.value, "my_super_secret_token_key");
 
+        return decoded ;
+    }
+    catch (err) {
+        return null;
     }
 }
