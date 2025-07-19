@@ -12,6 +12,9 @@ export default function TaskComponent() {
 
     const [openWorkingDay, setOpenWorkingDay] = React.useState("");
 
+    const [addWork, setAddWork] = React.useState(false);
+    const [addWorkData, setAddWorkData] = React.useState("");
+
     const createWorkingHandler = async () => {
         setWorkingLoading(true);
 
@@ -20,7 +23,7 @@ export default function TaskComponent() {
         }
 
         try {
-            let res = await API.post('/task', data);
+            await API.post('/workingDay', data);
             await workDayHandler()
         }
 
@@ -34,7 +37,7 @@ export default function TaskComponent() {
 
     const workDayHandler = async () => {
         try {
-            let res = await API.get('/task');
+            const res = await API.get('/workingDay');
             setWorkDayList(res.data);
         }
         catch (err) {
@@ -116,14 +119,36 @@ export default function TaskComponent() {
                         {
                             item._id === openWorkingDay && (
                                 <div >
-                                    {/*work link  tittle*/}
+                                    {/*work link tittle*/}
 
-                                    <div className={'px-4 py-2 flex items-center justify-between border-b border-lightLine '}>
-                                        <h1 className={"text-neutral-900 uppercase "}>Work list </h1>
+                                    <div className={'px-4 py-2 flex items-center  border-b border-lightLine '}>
+                                        <h1 className={"text-neutral-900 uppercase flex-1  "}>Work list </h1>
 
-                                        <button className={'bg-black text-white text-xs px-3 py-2 rounded-md cursor-pointer'}>
-                                            Add Work
-                                        </button>
+                                        {
+                                            addWork === true ? (
+                                                <div className={'flex items-center gap-2  flex-1'}>
+                                                    <input
+                                                        type="text"
+                                                        value={addWorkData}
+                                                        onChange={(e) => setAddWorkData(e.target.value)}
+                                                        placeholder="Type your work name"
+                                                        className="  bg-secondary/8  px-3 py-[6px] rounded-md outline-0 text-base w-full"
+
+                                                    />
+
+                                                    <button onClick={()=> setAddWork (false)} className={'bg-black text-white text-xs px-3 py-2 rounded-md cursor-pointer border border-black'}>
+                                                        Add
+                                                    </button>
+
+                                                </div>
+
+                                            ) :(
+                                                <button onClick={()=> setAddWork (true)} className={'bg-black text-white text-xs px-3 py-2 rounded-md cursor-pointer'}>
+                                                    Add Work
+                                                </button>
+                                            )
+                                        }
+
                                     </div>
 
                                     {/*work list*/}

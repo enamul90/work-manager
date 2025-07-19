@@ -1,7 +1,7 @@
 import {connectDB} from "@/app/lib/db";
 import {getAuthUser} from "@/app/lib/auth";
 import {NextResponse} from "next/server";
-import Task from "@/app/models/Task";
+import WorkingDay from "@/app/models/WorkingDay";
 
 
 export async function POST(req) {
@@ -13,8 +13,8 @@ export async function POST(req) {
 
     const { tittle} = await req.json();
 
-    const task = await Task.create({ userId: user.userId, tittle});
-    return NextResponse.json(task);
+    const workingDay = await WorkingDay.create({ userId: user.userId, tittle});
+    return NextResponse.json(workingDay);
 
 }
 
@@ -23,10 +23,13 @@ export async function GET( ) {
     const user = getAuthUser();
 
 
+
+
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, );
 
 
-    const task = await Task.find({ userId: user.userId}) .sort({ _id: -1 });
-    return NextResponse.json(task);
+    const workingDay = await WorkingDay.find({ userId: user.userId}) .sort({ _id: -1 });
+    console.log(workingDay);
+    return NextResponse.json(workingDay);
 
 }
